@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css" />
+    <script src="https://kit.fontawesome.com/2a075df1c0.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <title>Dashboard</title>
+</head>
+<body>
+    <section class="text-center">
+        <nav class="navbar bg-secondary text-light p-2 justify-content-between" id="navbar">
+            <h3 class="text-light text-justify ms-5">Welcome {{ user.first_name }}</h3>
+            <div class="d-flex">
+                <a class="btn rounded-pill btn-success m-2" href="/all_recipes">Back to Recipes</a>
+                <a class="btn rounded-pill btn-danger m-2" href="/logout">Logout</a>
+            </div>
+        </nav>
+        <div class="p-3 bg-image" style="
+            background-image: url('static/imgs/recipebook.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            border-radius: rounded;
+            height: 560px;
+            opacity: 0.9;
+            "></div>
+    <div class="card mx-4 mx-md-5 shadow-5-strong" style="
+    margin-top: -525px;
+    background: hsla(203, 12%, 75%, 0.3);
+    backdrop-filter: blur(3px);">
+        <div class="card-body py-5 px-md-5">
+            <div class="row d-flex justify-content-center">
+                    <div class="messages">
+                        {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <p class="mb-3 text danger"><em>{{message}}</em></p>
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <form action="/create_recipe" method="POST" >
+                            <div class="mb-3 mr-5">
+                                <label for="name" class="form-label">Name</label>
+                                <input type="text" class="form-control mb-3" rows="2" name="name">
+                                <label for="description" class="form-label">Description</label>
+                                <input type="text" class="form-control mb-3" rows="3" name="description">
+                                <label for="instructions" class="form-label">Instructions</label>
+                                <input type="text" class="form-control" rows="5" name="instructions">
+                            </div>
+                            <div class="mb-3 ml-5">
+                                <label for="date_made" class="form-label">Date Cooked/Made</label>
+                                <input type="date" class="form-control" name="date_made">
+                                <div class="my-2">
+                                    <label for="quick" class="form-label">Under 30 minutes? </label>
+                                    <input type="radio" id="yes" name="quick" value="yes">
+                                    <label for="yes">Yes</label>
+                                    <input type="radio" id="no" name="quick" value="no">
+                                    <label for="no">No</label>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary" type="submit">Add Recipe</button>
+                        </form>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
+</body>
+</html>

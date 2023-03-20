@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Recipe</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+</head>
+<body>
+    <section class="text-center">
+        <nav class="navbar bg-secondary text-light p-2 justify-content-between">
+            <h3 class="text-light text-justify mx-5">{{ user.first_name }}'s Recipes</h3>
+            <div class="d-flex">
+                <a class="btn rounded-pill btn-success" href="/all_recipes">View All Recipes</a>
+                <a class="btn rounded-pill btn-danger ml-4 mr-4" href="/logout">Logout</a>
+            </div>
+        </nav>
+        <div class="p-3 bg-image" style="
+            background-image: url('/static/imgs/recipebook.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            border-radius: rounded;
+            height: 500px;
+            opacity: 0.9;
+            "></div>
+    <div class="card mx-4 mx-md-5 shadow-5-strong" style="
+    margin-top: -475px;
+    background: hsla(203, 12%, 75%, 0.3);
+    backdrop-filter: blur(3px);">
+        <div class="card-body py-5 px-md-5">
+            <div class="row d-flex justify-content-center">
+                <div class="messages">
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <p class="mb-3 text danger"><em>{{message}}</em></p>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                </div>
+                <h3 class="text-center mb-2">{{one_recipe.name}}</h3>
+                <div class="card col-6 mx-auto border-dark p-4">
+                    <p><span class="font-weight-bold">Description:</span> {{one_recipe.description}}</p>
+                    <p><span class="font-weight-bold">Instructions:</span> {{one_recipe.instructions}}</p>
+                    <p><span class="font-weight-bold">Under 30mins:</span> {{one_recipe.quick}}</p>
+                    <p><span class="font-weight-bold">Date Made:</span> {{one_recipe.date_made}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
+</body>
+</html>
