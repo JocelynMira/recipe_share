@@ -71,13 +71,16 @@ def update_recipe():
 
 @app.route('/display_recipe/<int:id>')
 def display(id):
-    data = {
-        'id' : id
-    }
-    user_data = {
+    if 'user_id' not in session:
+        return redirect('/logout')
+    else:
+        data = {
+            'id' : id
+        }
+        user_data = {
         'id': session['user_id']
-    }
-    return render_template ('show_recipe.html', one_recipe = Recipe.get_recipe(data), user = User.get_user_by_id(user_data))
+        }
+    return render_template ('show_recipe.html', one_recipe = Recipe.get_recipe(data), user = User.get_user_by_id(user_data), all_users = User.show_all())
 
 @app.route('/delete_recipe/<int:id>')
 def delete(id):

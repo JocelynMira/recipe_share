@@ -49,6 +49,7 @@ def dashboard():
         data = {
             'id' : session['user_id']
         }
+        print(data)
         return render_template ('dashboard.html' , user = User.get_user_by_id(data), all_recipes = Recipe.get_all_recipes(), all_users = User.show_all()) # left html side, right controller side
 
 # user login/ LOGIN VALIDATIONS

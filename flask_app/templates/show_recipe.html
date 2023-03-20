@@ -11,7 +11,7 @@
 <body>
     <section class="text-center">
         <nav class="navbar bg-secondary text-light p-2 justify-content-between">
-            <h3 class="text-light text-justify mx-5">{{ user.first_name }}'s Recipes</h3>
+            <h3 class="text-light text-justify mx-5">Hello, {{ user.first_name }}</h3>
             <div class="d-flex">
                 <a class="btn rounded-pill btn-success" href="/all_recipes">View All Recipes</a>
                 <a class="btn rounded-pill btn-danger ml-4 mr-4" href="/logout">Logout</a>
@@ -46,6 +46,11 @@
                     <p><span class="font-weight-bold">Instructions:</span> {{one_recipe.instructions}}</p>
                     <p><span class="font-weight-bold">Under 30mins:</span> {{one_recipe.quick}}</p>
                     <p><span class="font-weight-bold">Date Made:</span> {{one_recipe.date_made}}</p>
+                    {% for u in all_users %}
+                        {% if one_recipe.user_id == u.id %} 
+                            <p><span class="font-weight-bold">Posted By:{{ u.first_name }}</span></p>
+                        {% endif %}
+                    {% endfor %}
                 </div>
             </div>
         </div>
